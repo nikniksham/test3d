@@ -18,10 +18,10 @@ class Camera:
         return point
 
     def rotate(self, point):
-        # matr = multiply_matrix(get_matrix_for_x(self.rot), get_matrix_for_y(self.rot))
+        matr = multiply_matrix(get_matrix_for_y(self.rot), get_matrix_for_z(self.rot))
+        matr = multiply_matrix(matr, get_matrix_for_x(self.rot))
+        # matr = multiply_matrix(get_matrix_for_y(self.rot), get_matrix_for_x(self.rot))
         # matr = multiply_matrix(matr, get_matrix_for_z(self.rot))
-        matr = multiply_matrix(get_matrix_for_y(self.rot), get_matrix_for_x(self.rot))
-        matr = multiply_matrix(matr, get_matrix_for_z(self.rot))
         point = multiply_matrix(matr, [[point[0]], [point[1]], [point[2]]])
         point = [point[0][0], point[1][0], point[2][0]]
         return point
@@ -220,14 +220,14 @@ while True:
             elif event.key == pygame.K_RIGHT:
                 rot[1] += 0.001
             elif event.key == pygame.K_UP:
-                # rot[2] -= math.cos(mov_rot[1]) * 0.001
-                # rot[0] -= math.sin(mov_rot[1]) * 0.001
-                rot[2] -= 0.001
+                rot[2] -= math.cos(mov_rot[1]) * 0.001
+                rot[0] += math.sin(mov_rot[1]) * 0.001
+                # rot[2] -= 0.001
                 print(mov_rot, math.cos(mov_rot[1]), math.sin(mov_rot[1]))
             elif event.key == pygame.K_DOWN:
-                rot[2] += 0.001
-                # rot[2] += math.cos(mov_rot[1]) * 0.001
-                # rot[0] += math.sin(mov_rot[1]) * 0.001
+                # rot[2] += 0.001
+                rot[2] += math.cos(mov_rot[1]) * 0.001
+                rot[0] -= math.sin(mov_rot[1]) * 0.001
             elif event.key == pygame.K_r:
                 rot[0] -= 0.001
             elif event.key == pygame.K_y:
@@ -262,13 +262,13 @@ while True:
             elif event.key == pygame.K_RIGHT:
                 rot[1] -= 0.001
             elif event.key == pygame.K_UP:
-                rot[2] += 0.001
-                # rot[2] += math.cos(mov_rot[1]) * 0.001
-                # rot[0] += math.sin(mov_rot[1]) * 0.001
+                # rot[2] += 0.001
+                rot[2] += math.cos(mov_rot[1]) * 0.001
+                rot[0] -= math.sin(mov_rot[1]) * 0.001
             elif event.key == pygame.K_DOWN:
-                rot[2] -= 0.001
-                # rot[2] -= math.cos(mov_rot[1]) * 0.001
-                # rot[0] -= math.sin(mov_rot[1]) * 0.001
+                # rot[2] -= 0.001
+                rot[2] -= math.cos(mov_rot[1]) * 0.001
+                rot[0] += math.sin(mov_rot[1]) * 0.001
             elif event.key == pygame.K_r:
                 rot[0] += 0.001
             elif event.key == pygame.K_y:
